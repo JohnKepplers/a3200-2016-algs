@@ -1,5 +1,6 @@
-from sklearn import datasets
 import math
+
+from sklearn import datasets, neighbors
 
 
 def distance(m, x, y, v):
@@ -14,7 +15,7 @@ def distance(m, x, y, v):
             return math.fabs(x[1] - y[1]), v
 
 
-def data_processing():
+def data_processing(k):
     dict_learning = {}
     dict_test = {}
     iris = datasets.load_iris()
@@ -26,7 +27,7 @@ def data_processing():
             dict_test.update({frozenset(xx): [y[i], None]})
         else:
             dict_learning.update({frozenset(xx): y[i]})
-    return kNN(20, dict_learning, dict_test, 50)
+    return kNN(k, dict_learning, dict_test, 50)
 
 
 def kNN(k, dict_learning, dict_test, weight):
@@ -62,8 +63,30 @@ def kNN(k, dict_learning, dict_test, weight):
         elif max(a, b, c) == c:
             d += 2
         dict_test[k_test][1] = d
-    return dict_test
+    return CV(dict_test)
+
+
+def CV(dict_test):
+    print(dict_test)
+    mistakes = 0
+    n = 0
+    for key, value in dict_test.items():
+        n += 1
+        if dict_test[key][0] != dict_test[key][1]:
+            mistakes += 1
+    return (n - mistakes) / n
+
+
+def grid_search():
+    maximum = 0
+    k = 0
+    for i in range(80):
+        z = data_processing(i)
+        if z > maximum:
+            k = i
+            maximum = z
+    return k
 
 
 if __name__ == '__main__':
-    print(data_processing())
+    print(data_processing(10))
