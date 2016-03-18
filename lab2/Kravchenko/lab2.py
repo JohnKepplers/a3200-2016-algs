@@ -3,7 +3,7 @@ import numpy as np
 
 def linear_regression(x, y):
     m = x.shape[0]
-    matrix = np.ndarray(shape=(m, 2))
+    matrix = np.array(m, 2)
     for j in range(m):
         matrix[j, 0] = 1
     matrix[:, 1] = x
