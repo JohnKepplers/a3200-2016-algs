@@ -109,7 +109,7 @@ class Genetic_algorithm():
                     self.n -= 1
 
 
-GA = Genetic_algorithm(100, 200, 200)
+GA = Genetic_algorithm(100, 200)
 GA.create_population()
 while not (GA.flag):
     GA.fit()
