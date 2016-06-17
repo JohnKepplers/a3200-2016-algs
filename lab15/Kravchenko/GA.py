@@ -5,10 +5,6 @@ def function1(x):
     return x[0] and (x[9] or not x[8]) and (x[1] or not x[2] or not x[3]) or x[7] and x[4] and x[5] and x[6]
 
 
-def function2(x, y):
-    return (1 - x) ** 2 + 100 * (y - x ** 2) ** 2
-
-
 class Genetic_algorithm():
     def __init__(self, m, n, const):
         self.const = const
@@ -36,9 +32,7 @@ class Genetic_algorithm():
                 good += 1
             else:
                 bad += 1
-        print(good/(good + bad))
-        if good / (bad + good) > 0.99:
-            print(good/(good + bad))
+        if good / (bad + good) > 0.9:
             self.flag = True
 
     def crossing_over(self, object1, object2):
@@ -121,4 +115,24 @@ while not (GA.flag):
     GA.fit()
     GA.create_new_generation(70)
     GA.selection()
-print(GA.population)
+local_minimum = GA.population[0]
+if GA.function(GA.crutch(local_minimum)) == False:
+    my_list = list(bin(local_minimum))[2:]
+    for i in range(len(my_list)):
+        if my_list[i] == '1':
+            my_list[i] = True
+        elif my_list[i] == '0':
+            my_list[i] = False
+    print(my_list)
+else:
+    i = 1
+    while local_minimum:
+        local_minimum = GA.population[i]
+        i += 1
+    my_list = list(bin(local_minimum))[2:]
+    for i in range(len(my_list)):
+        if my_list[i] == '1':
+            my_list[i] = True
+        elif my_list[i] == '0':
+            my_list[i] = False
+    print(my_list)
