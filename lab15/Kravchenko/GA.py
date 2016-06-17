@@ -6,8 +6,8 @@ def function1(x):
 
 
 class Genetic_algorithm():
-    def __init__(self, m, n, const):
-        self.const = const
+    def __init__(self, m, n):
+        self.const = n
         self.n = n
         self.m = m
         self.population = []
