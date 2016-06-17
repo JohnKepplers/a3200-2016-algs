@@ -95,19 +95,6 @@ class Genetic_algorithm():
             self.population = new_population
             self.n = self.const
 
-        while self.n != self.const:
-            iterator += 1
-            i = randint(0, self.n - 1)
-            if self.function(self.crutch(self.population[i])) == True:
-                del self.population[i]
-                self.n -= 1
-            if iterator > 50:
-                while self.n != self.const:
-                    print(self.n, self.const)
-                    j = randint(0, self.n - 1)
-                    del self.population[j]
-                    self.n -= 1
-
 
 GA = Genetic_algorithm(100, 200)
 GA.create_population()
